@@ -8,4 +8,4 @@ import { ProductsService } from './products.service';
     providers: [ProductsService]
 })
 
-export class ProductModule{}
+export class ProductsModule{}
