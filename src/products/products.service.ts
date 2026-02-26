@@ -7,7 +7,7 @@ export class ProductsService{
 
     insertProduct(title: string, desc: string, price: number){
     const prodId= Math.random().toString();
-    const newProduct = new Product(new Date().toString(), title, desc, price)
+    const newProduct = new Product(prodId, title, desc, price)
     this.products.push(newProduct);
     console.log(prodId)
     return prodId;
