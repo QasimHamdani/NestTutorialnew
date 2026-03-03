@@ -8,13 +8,13 @@ constructor (private readonly productsService: ProductsService){
 }
 
     @Post()
-    addProduct(
+    async addProduct(
         @Body('title') prodTitle: string, 
         @Body('description') prodDesc: string,
         @Body('price') prodPrice: number,
 ) {
 
-        const generatedId= this.productsService.insertProduct(
+        const generatedId= await this.productsService.insertProduct(
             prodTitle, 
             prodDesc, 
             prodPrice
@@ -24,9 +24,9 @@ constructor (private readonly productsService: ProductsService){
         
     }
     @Get()
-    getAllProducts(){
-        return this.productsService.getProducts();
-
+    async getAllProducts(){
+        const products = await this.productsService.getProducts();
+        return products;
     }
 
     @Get(':id')

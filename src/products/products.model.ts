@@ -7,12 +7,12 @@ export const ProductSchema = new mongoose.Schema({
 });
 
 
-export class Product {
+export interface Product {
 
-    constructor(
-        public id: string,
-        public title: string, 
-        public desc: string, 
-        public price: number
-    ) { };
+    
+         id: string;
+         title: string;
+         desc: string ;
+         price: number;
+     
 }
