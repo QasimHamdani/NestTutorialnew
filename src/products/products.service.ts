@@ -23,13 +23,13 @@ export class ProductsService{
         return products.map((prod) => ({id: prod.id, title: prod.title, description: prod.desc, price: prod.price }));
     }
 
-    getSingleProduct(productId: string){
-        const product = this.findProduct(productId)[0];
+    async getSingleProduct(productId: string){
+        const product = await this.findProduct(productId);
        
-        return { ...product};
+        return product;
 
     }
-    updateProduct(productId: string, title: string, desc: string, price: number){
+ /**   updateProduct(productId: string, title: string, desc: string, price: number){
         const [product, index] = this.findProduct(productId);
         const updatedProduct = {...product};
 
@@ -48,14 +48,14 @@ export class ProductsService{
 
         this.products[index]={...product, };
 
-    }
-    private findProduct(id:string): [Product, number]{
-    const productIndex = this.products.findIndex((prod) => prod.id === id);
-    const product = this.products[productIndex];
+    }*/ 
+    private async findProduct(id:string): Promise<Product>{
+    
+    const product = await this.productModel.findById(id)
         if(!product){
-            throw new NotFoundException();
+            throw new NotFoundException('Could not find Product.');
         }
-        return [product, productIndex];
+        return {id: product.id, title: product.title, desc: product.desc, price: product.price};
     }
     deleteProduct(prodId: string){
         const index= this.findProduct(prodId)[1];
